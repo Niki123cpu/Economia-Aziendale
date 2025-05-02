@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz di Economia Aziendale</title>
+  <style>
+    body { font-family: Arial; background: #f8f8f8; padding: 20px; }
+    .quiz { background: #fff; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 0 10px #ccc; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 20px; }
+    .result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="quiz">
+    <h1>🧠 Quiz Contabilità</h1>
+    <div class="question">
+      <p><strong>1. Cos'è la partita doppia?</strong></p>
+      <label><input type="radio" name="q1" value="a" /> Un metodo per registrare entrate e uscite senza bilanci</label><br/>
+      <label><input type="radio" name="q1" value="b" /> Un metodo contabile basato su dare e avere</label><br/>
+      <label><input type="radio" name="q1" value="c" /> Un tipo di sconto commerciale</label>
+    </div>
+    <div class="question">
+      <p><strong>2. Cosa va nel dare in un acquisto di merci?</strong></p>
+      <label><input type="radio" name="q2" value="a" /> Merci c/acquisti</label><br/>
+      <label><input type="radio" name="q2" value="b" /> Debiti v/fornitori</label><br/>
+      <label><input type="radio" name="q2" value="c" /> Capitale sociale</label>
+    </div>
+    <button onclick="correggi()">Controlla risposte</button>
+    <div class="result" id="result"></div>
+    <br/>
+    <a href="dashboard.html">⬅️ Torna alla Dashboard</a>
+  </div>
+  <script>
+    function correggi() {
+      let punteggio = 0;
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'b') punteggio++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'a') punteggio++;
+      document.getElementById("result").innerText = `Hai ottenuto ${punteggio} su 2 punti`;
+    }
+  </script>
+</body>
+</html>

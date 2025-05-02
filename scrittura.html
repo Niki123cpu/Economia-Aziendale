@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrittura Contabile Guidata</title>
+  <style>
+    body { font-family: Arial; background: #f2f2f2; padding: 20px; }
+    .box { background: white; max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #bbb; }
+    label, input { display: block; width: 100%; margin-bottom: 10px; }
+    input { padding: 10px; }
+    button { padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #2980b9; }
+    .feedback { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>📑 Scrittura Guidata</h1>
+    <p><strong>Esercizio:</strong> Acquisto merci per 1000€ + IVA 22% da fornitore, pagamento a 30 giorni.</p>
+    <label>Conto in Dare:</label>
+    <input id="dare" type="text" placeholder="es. Merci c/acquisti" />
+    <label>Conto in Avere:</label>
+    <input id="avere" type="text" placeholder="es. Debiti v/fornitori" />
+    <button onclick="verifica()">Verifica scrittura</button>
+    <div class="feedback" id="feedback"></div>
+    <br/>
+    <a href="dashboard.html">⬅️ Torna alla Dashboard</a>
+  </div>
+  <script>
+    function verifica() {
+      const dare = document.getElementById("dare").value.toLowerCase().trim();
+      const avere = document.getElementById("avere").value.toLowerCase().trim();
+      if (dare.includes("merci") && avere.includes("debiti")) {
+        document.getElementById("feedback").innerText = "✅ Scrittura corretta!";
+      } else {
+        document.getElementById("feedback").innerText = "❌ Qualcosa non va, riprova.";
+      }
+    }
+  </script>
+</body>
+</html>
