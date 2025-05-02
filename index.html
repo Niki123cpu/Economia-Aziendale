@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login con Firebase</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef2f3; margin: 0; padding: 0; }
+    .container { max-width: 400px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    h1 { text-align: center; color: #2c3e50; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #3498db; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #2980b9; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Login Studente</h1>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Accedi</button>
+    <button onclick="signup()">Registrati</button>
+    <div id="welcome" class="hidden">
+      <h2>Benvenuto, <span id="userEmail"></span></h2>
+      <button onclick="logout()">Esci</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAE2Jtz4TqbM2eLLMwcMT0ed3-ICj6u6UA",
+      authDomain: "login-4a567.firebaseapp.com",
+      projectId: "login-4a567",
+      storageBucket: "login-4a567.firebasestorage.app",
+      messagingSenderId: "185167711756",
+      appId: "1:185167711756:web:da737c9b7c58056ab7a829",
+      measurementId: "G-3HJEGP8Q7Z"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById("userEmail").textContent = userCredential.user.email;
+          document.getElementById("welcome").classList.remove("hidden");
+        })
+        .catch((error) => {
+          alert("Errore nel login: " + error.message);
+        });
+    }
+
+    function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("Registrazione completata! Ora puoi accedere.");
+        })
+        .catch((error) => {
+          alert("Errore nella registrazione: " + error.message);
+        });
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        document.getElementById("welcome").classList.add("hidden");
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+      });
+    }
+  </script>
+</body>
+</html>
