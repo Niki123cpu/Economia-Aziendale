@@ -22,10 +22,6 @@
     <input type="password" id="password" placeholder="Password">
     <button onclick="login()">Accedi</button>
     <button onclick="signup()">Registrati</button>
-    <div id="welcome" class="hidden">
-      <h2>Benvenuto, <span id="userEmail"></span></h2>
-      <button onclick="logout()">Esci</button>
-    </div>
   </div>
 
   <!-- Firebase SDK -->
@@ -49,9 +45,8 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          document.getElementById("userEmail").textContent = userCredential.user.email;
-          document.getElementById("welcome").classList.remove("hidden");
+        .then(() => {
+          window.location.href = "dashboard.html";
         })
         .catch((error) => {
           alert("Errore nel login: " + error.message);
@@ -68,14 +63,6 @@
         .catch((error) => {
           alert("Errore nella registrazione: " + error.message);
         });
-    }
-
-    function logout() {
-      auth.signOut().then(() => {
-        document.getElementById("welcome").classList.add("hidden");
-        document.getElementById("email").value = "";
-        document.getElementById("password").value = "";
-      });
     }
   </script>
 </body>
